@@ -129,3 +129,5 @@ class State_Machine:
     def gallery(self):
         open_new("file:///home/lab246/Desktop/openpose_project_UI/photoGalleryInformation.html")
         pass
+
+s = State_Machine()
