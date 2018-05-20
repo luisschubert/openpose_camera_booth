@@ -44,7 +44,7 @@ class State_Machine:
                     highest = f
             most_current = highest
 
-            current = json.load("/home/lab246/json_output/"+most_current)
+            current = json.load(open("/home/lab246/json_output/"+most_current))
             if len(current['people']) != 0:
                 self.reset_folders()
                 return True
