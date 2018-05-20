@@ -36,7 +36,7 @@ class State_Machine:
             keypoint_data_files = [f for f in os.listdir(keypoint_data_dir_path) if
                                    os.path.isfile(os.path.join(keypoint_data_dir_path, f))]
             highest = keypoint_data_files[0]
-            num = highest.split('_keypoints.json')[0]
+            num = int(highest.split('_keypoints.json')[0])
             for f in keypoint_data_files:
                 new_num = int(f.split('_keypoints.json')[0])
                 if new_num > num:
