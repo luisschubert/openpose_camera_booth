@@ -47,7 +47,7 @@ class State_Machine:
             print(most_current)
             print(json_path)
             time.sleep(4)
-            current = json.load(open(os.path.join("/home/lab246/Desktop/json_output/", most_current)))
+            current = json.load(open(json_path))
             if len(current['people']) != 0:
                 self.reset_folders()
                 return True
