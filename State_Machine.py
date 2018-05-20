@@ -15,26 +15,24 @@ class State_Machine:
         self.main_loop()
         pass
 
-    async def capture_images(self):
+    def capture_images(self):
         cmd = ["./build/examples/openpose/openpose.bin", "--display", "0", "--write_images", "/home/lab246/Desktop/jpg_output",
                "--write_images_format", "jpg", "--hand", "--write_json", "/home/lab246/Desktop/json_output"]
         output = subprocess.Popen(cmd, cwd="/home/lab246/Documents/openpose6/openpose")
         time.sleep(3)
-        await output.kill()
+        output.kill()
         return True
 
     def reset_folders(self):
         os.system("rm *.json /home/lab246/Desktop/json_output")
         os.system("rm *.jpg /home/lab246/Desktop/jpg_output")
 
-    async def check_for_human(self):
+    def check_for_human(self):
         keypoint_data_dir_path = "/home/lab246/Desktop/json_output"
 
         # read from a folder json file and see if there is a human in view.
         while True:
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(self.capture_images())
-            loop.close()
+            self.capture_images()
             keypoint_data_files = [f for f in os.listdir(keypoint_data_dir_path) if
                                    os.path.isfile(os.path.join(keypoint_data_dir_path, f))]
             highest = keypoint_data_files[0]
@@ -52,15 +50,13 @@ class State_Machine:
                 return True
             else:
                 self.reset_folders()
-                await asyncio.sleep(1)
+                time.sleep(1)
 
 
     def get_gesture(self):
         keypoint_data_dir_path = "/home/lab246/Desktop/json_output"
         while True:
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(self.capture_images())
-            loop.close()
+            self.capture_images()
             keypoint_data_files = [f for f in os.listdir(keypoint_data_dir_path) if
                                    os.path.isfile(os.path.join(keypoint_data_dir_path, f))]
             highest = keypoint_data_files[0]
@@ -83,9 +79,7 @@ class State_Machine:
 
     def main_loop(self):
         while True:
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(self.check_for_human())
-            loop.close()
+            self.check_for_human()
             self.p_capture_info()
             pass
 
@@ -105,9 +99,7 @@ class State_Machine:
 
         images_dir_path = "/home/lab246/Desktop/jpg_output"
 
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.capture_images())
-        loop.close()
+        self.capture_images()
         image_files = [f for f in os.listdir(images_dir_path) if
                                os.path.isfile(os.path.join(images_dir_path, f))]
         highest = image_files[0]
