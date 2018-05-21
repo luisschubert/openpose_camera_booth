@@ -20,7 +20,7 @@ class State_Machine:
                "--write_images_format", "jpg", "--hand", "--write_json", "/home/lab246/Desktop/json_output"]
         output = subprocess.Popen(cmd, cwd="/home/lab246/Documents/openpose6/openpose")
         time.sleep(3)
-        output.kill()
+        output.terminate()
         return True
 
     # def reset_folders(self):
