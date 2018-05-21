@@ -23,9 +23,9 @@ class State_Machine:
         output.kill()
         return True
 
-    def reset_folders(self):
-        os.system("rm *.json /home/lab246/Desktop/json_output")
-        os.system("rm *.jpg /home/lab246/Desktop/jpg_output")
+    # def reset_folders(self):
+    #     os.system("rm *.json /home/lab246/Desktop/json_output")
+    #     os.system("rm *.jpg /home/lab246/Desktop/jpg_output")
 
     def check_for_human(self):
         keypoint_data_dir_path = "/home/lab246/Desktop/json_output"
@@ -46,10 +46,10 @@ class State_Machine:
             json_path = "/home/lab246/Desktop/json_output/"+most_current
             current = json.load(open(json_path))
             if len(current['people']) != 0:
-                self.reset_folders()
+                # self.reset_folders()
                 return True
             else:
-                self.reset_folders()
+                # self.reset_folders()
                 time.sleep(1)
 
 
@@ -70,6 +70,7 @@ class State_Machine:
             json_path = "/home/lab246/Desktop/json_output/" + most_current
             current = json.load(open(json_path))
             if len(current['people']) != 0:
+                print('returning')
                 return 'no_human'
             else:
                 #assert NotImplementedError('need to implement decision tree here')
@@ -81,6 +82,9 @@ class State_Machine:
     def main_loop(self):
         while True:
             self.check_for_human()
+            print('about to show capture info')
+            time.sleep(10)
+
             self.p_capture_info()
             pass
 
@@ -91,9 +95,12 @@ class State_Machine:
         # wait for hands to be raised
         return_code = ''
         while return_code is not 'no_human':
+            time.sleep(5)
+            print('about to get gesture')
             return_code = self.get_gesture()
             if return_code is 'arms_raised':
                 self.p_capture()
+                return False
 
     def p_capture(self):
         webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/photoCaptureCountdown.html")
@@ -112,7 +119,7 @@ class State_Machine:
                 highest = f
         most_current = highest
         os.system("mv /home/lab246/Desktop/jpg_output/"+most_current + " /home/lab246/Desktop/webserver/saveTo/tosave.jpg")
-        self.reset_folders()
+        # self.reset_folders()
 
 
     def p_save(self):
