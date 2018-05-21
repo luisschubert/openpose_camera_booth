@@ -44,9 +44,6 @@ class State_Machine:
                     highest = f
             most_current = highest
             json_path = "/home/lab246/Desktop/json_output/"+most_current
-            print(most_current)
-            print(json_path)
-            time.sleep(10)
             current = json.load(open(json_path))
             if len(current['people']) != 0:
                 self.reset_folders()
@@ -63,14 +60,15 @@ class State_Machine:
             keypoint_data_files = [f for f in os.listdir(keypoint_data_dir_path) if
                                    os.path.isfile(os.path.join(keypoint_data_dir_path, f))]
             highest = keypoint_data_files[0]
-            num = highest.split('_keypoints.json')[0]
+            num = int(highest.split('_keypoints.json')[0])
             for f in keypoint_data_files:
                 new_num = int(f.split('_keypoints.json')[0])
                 if new_num > num:
                     num = new_num
                     highest = f
             most_current = highest
-            current = json.load("/home/lab246/Desktop/json_output/most_current.json")
+            json_path = "/home/lab246/Desktop/json_output/" + most_current
+            current = json.load(open(json_path))
             if len(current['people']) != 0:
                 return 'no_human'
             else:
