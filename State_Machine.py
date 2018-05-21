@@ -1,5 +1,6 @@
 import asyncio
 import json
+import signal
 import os
 import subprocess
 import time
@@ -20,7 +21,7 @@ class State_Machine:
                "--write_images_format", "jpg", "--hand", "--write_json", "/home/lab246/Desktop/json_output"]
         output = subprocess.Popen(cmd, cwd="/home/lab246/Documents/openpose6/openpose")
         time.sleep(3)
-        output.terminate()
+        output.send_signal(signal=signal.SIGINT)
         return True
 
     # def reset_folders(self):
