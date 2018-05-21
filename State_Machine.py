@@ -22,6 +22,7 @@ class State_Machine:
         output = subprocess.Popen(cmd, cwd="/home/lab246/Documents/openpose6/openpose")
         time.sleep(3)
         output.send_signal(signal.SIGINT)
+        time.sleep(2)
         return True
 
     # def reset_folders(self):
