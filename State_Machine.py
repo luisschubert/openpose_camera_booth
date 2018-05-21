@@ -3,7 +3,7 @@ import json
 import os
 import subprocess
 import time
-from webbrowser import *
+import webbrowser
 class State_Machine:
     states = ['init', 'p_capture_info', 'p_capture', 'p_save', 'gallery' , 'scroll_right', 'scroll_left']
     def __init__(self):
@@ -89,7 +89,7 @@ class State_Machine:
 
     def p_capture_info(self):
         # show the info screen
-        open_new("file:///home/lab246/Desktop/openpose_project_UI/photoCaptureInformation.html")
+        webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/photoCaptureInformation.html")
         # wait for hands to be raised
         return_code = ''
         while return_code is not 'no_human':
@@ -98,7 +98,7 @@ class State_Machine:
                 self.p_capture()
 
     def p_capture(self):
-        open_new("file:///home/lab246/Desktop/openpose_project_UI/photoCaptureCountdown.html")
+        webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/photoCaptureCountdown.html")
 
         images_dir_path = "/home/lab246/Desktop/jpg_output"
 
@@ -118,11 +118,11 @@ class State_Machine:
 
 
     def p_save(self):
-        open_new("file:///home/lab246/Desktop/openpose_project_UI/savePhoto.html")
+        webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/savePhoto.html")
         pass
 
     def gallery(self):
-        open_new("file:///home/lab246/Desktop/openpose_project_UI/photoGalleryInformation.html")
+        webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/photoGalleryInformation.html")
         pass
 
 s = State_Machine()
