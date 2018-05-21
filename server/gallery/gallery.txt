@@ -1,0 +1,1 @@
+Here photos will be stored for the gallery.
