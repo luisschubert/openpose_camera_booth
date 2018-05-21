@@ -1,4 +1,4 @@
-import asyncio
+
 import json
 import signal
 import os
@@ -129,7 +129,12 @@ class State_Machine:
         pass
 
     def gallery(self):
-        webbrowser.open_new("file:///home/lab246/Desktop/openpose_project_UI/photoGalleryInformation.html")
+        gallery_path = "/home/lab246/Desktop/openpose_camera_booth/server/gallery"
+
+        num_images = len(os.listdir(gallery_path))
+        url_for_gallery = "localhost:7777/gallery.html?photoid="
+
+        webbrowser.open_new(url_for_gallery+str(1))
         pass
 
 s = State_Machine()
