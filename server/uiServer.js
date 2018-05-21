@@ -1,8 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-app.use('gallery',express.static(__dirname+'/gallery'));
-app.use('savePhoto',express.static(__dirname+'/savePhoto'));
+app.use('/gallery',express.static(__dirname+'gallery'));
+app.use('/savePhoto',express.static(__dirname+'savePhoto'));
 
 app.set('port', 7777);
 app.get('/photoCaptureInformation', (req, res) => {
